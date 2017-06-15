@@ -1,0 +1,21 @@
+====================
+§ 1 Prologue
+====================
+
+--------------------
+§ 1.2 The Languages
+--------------------
+
+Lang    | pros                                       | paradigm
+Ruby    | ease of use, readability                   | OO
+Io      | concurrency, syntax                        | prototype
+Prolog  | powerful                                   | logic
+Scala   | new generation                             | OO, FP
+Erlang  | concurrency, distribution, fault tolerance | FP
+Clojure | JVM, concurrency                           | OO ?
+Haskell | typing                                     | FP
+
+====================
+§ 2 Ruby
+====================
+
