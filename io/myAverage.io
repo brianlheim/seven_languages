@@ -5,7 +5,10 @@
 List myAverage := method(
   if(self isEmpty, return) # return nil
   sum := 0
-  self foreach(e, sum = sum + e)
+  self foreach(e,
+    if(e type != Number type, Exception raise("element not a number: " .. e))
+    sum = sum + e
+  )
   sum / self size
 )
 
