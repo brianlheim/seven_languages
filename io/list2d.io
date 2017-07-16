@@ -34,3 +34,28 @@ List2D transpose := method(
   )
   result
 )
+
+List2D asString := method(
+  result := ""
+  for(i, 0, self rows - 1,
+    result = result .. "[ "
+    for(j, 0, self cols - 1,
+      result = result .. self get(i, j) .. if(j == self cols - 1, "", ", ")
+    )
+    result = result .. if(i == self rows - 1, " ]", " ]\n")
+  )
+  result
+)
+
+Sequence asList2D := method(
+  splitSelf := self split("\n")
+  lists := splitSelf mapInPlace( x, x exSlice(2, x size - 2) split(", ") )
+  result := dim(lists size, lists at(0) size)
+  for(i, 0, lists size - 1,
+    for(j, 0, lists at(0) size - 1,
+      result set(i, j, lists at(i) at(j))
+    )
+  )
+  result
+)
+
