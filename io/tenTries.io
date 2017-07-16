@@ -2,7 +2,7 @@
 # Brian Heim
 # 2017-07-16
 
-secretNumber := (Random value * 100) round
+secretNumber := (Random value * 2000) round
 
 "Guess a secret number!" println
 
@@ -22,4 +22,5 @@ while ( guessed not and guessCount < 10,
   )
 )
 
-if ( guessed, "you did it", "you failed" )
+if ( guessed, "you did it", "you failed" ) println
+secretNumber
