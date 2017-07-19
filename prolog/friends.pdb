@@ -1,0 +1,12 @@
+% Friends.pdb
+% Brian Heim
+% 2017-07-19
+
+likes(wallace, cheese).
+likes(grommit, cheese).
+likes(wallace, sheep).
+likes(grommit, sheep).
+likes(sheep, sheep).
+likes(wendolene, sheep).
+
+friend(X, Y) :- \+(X = Y), likes(X, Z), likes(Y, Z).
