@@ -1,0 +1,18 @@
+% Author Database
+% Brian Heim
+% 2017-07-22
+
+wrote(dostoyevsky, crime_and_punishment).
+wrote(dostoyevsky, brothers_k).
+wrote(tolstoy, anna_karenin).
+wrote(tolstoy, war_and_peace).
+wrote(proust, in_search_of_lost_time).
+wrote(deleuze, thousand_plateaus).
+wrote(guattari, thousand_plateaus).
+wrote(deleuze, difference_and_repetition).
+wrote(heidegger, being_and_time).
+wrote(heidegger, lectures_of_heidegger).
+wrote(tolkein, silmarillion).
+wrote(tolkein, the_hobbit).
+wrote(tolkein, lord_of_the_rings).
+

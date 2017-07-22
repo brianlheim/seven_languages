@@ -1,0 +1,71 @@
+% Music database
+% Brian Heim
+% 2017-07-22
+
+% METAGENRE
+metagenre(spectralism, modernism).
+metagenre(russian_simplicity, modernism).
+metagenre(minimalism, modernism).
+metagenre(serialism, modernism).
+metagenre(micropolyphony, modernism).
+metagenre(polyrhythm, postmodernism).
+metagenre(polystylism, postmodernism).
+metagenre(late_classical, classical).
+metagenre(early_classical, classical).
+metagenre(late_baroque, baroque).
+metagenre(mid_baroque, baroque).
+metagenre(early_baroque, baroque).
+metagenre(impressionism, romantic).
+
+composer_metagenre(Who, Which) :-
+  piece(Who, Name, Genre),
+  metagenre(Genre, Which).
+
+piece_metagenre(Piece, Which) :-
+  piece(X, Piece, Genre),
+  metagenre(Genre, Which).
+
+% COMPOSER
+
+composer(Who) :- piece(Who, Name, Genre).
+
+% PIECES
+
+% newer pieces
+piece(murail, winter_fragments, spectralism).
+piece(murail, lappel_du_monde, spectralism).
+piece(murail, desintegrations, spectralism).
+piece(grisey, periodes, spectralism).
+piece(grisey, prologue, spectralism).
+piece(haas, string_quartet_2, spectralism).
+piece(gubaidulina, string_quartet_4, russian_simplicity).
+piece(ustvolskaya, piano_sonata_3, russian_simplicity).
+piece(ustvolskaya, piano_sonata_6, russian_simplicity).
+piece(riley, in_c, minimalism).
+piece(glass, symphony_5, minimalism).
+piece(glass, glassworks, minimalism).
+piece(reich, different_trains, minimalism).
+piece(reich, music_for_18, minimalism).
+piece(reich, drumming_music, minimalism).
+piece(stockhausen, licht, polyrhythm).
+piece(stockhausen, klavierstuck_10, serialism).
+piece(boulez, sur_incises, serialism).
+piece(boulez, piano_sonata_3, serialism).
+piece(webern, symphony, serialism).
+piece(corigliano, symphony_2, polystylism).
+piece(berio, sinfonia, polystylism).
+piece(ligeti, atmospheres, micropolyphony).
+piece(ligeti, late_piano_etudes, polyrhythm).
+
+% older pieces
+piece(beethoven, piano_sonata_3, mid_classical).
+piece(beethoven, piano_sonata_6, mid_classical).
+piece(beethoven, piano_sonata_30, late_classical).
+piece(mozart, piano_sonata_3, early_classical).
+piece(debussy, claire_de_lune, impressionism).
+piece(haydn, piano_sonata_6, early_classical).
+piece(haydn, piano_sonata_3, early_classical).
+piece(vivaldi, the_seasons, early_baroque).
+piece(bach, french_suite_1, late_baroque).
+piece(bach, st_matthew_passion, late_baroque).
+piece(bach, b_minor_mass, late_baroque).

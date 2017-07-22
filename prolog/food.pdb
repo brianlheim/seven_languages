@@ -1,0 +1,26 @@
+% food.pdb
+% Food types
+% Brian Heim
+% 2017-07-19
+
+food_type(seitan, fakemeat).
+food_type(tofu, fakemeat).
+food_type(tempeh, fakemeat).
+food_type(soymilk, fakemilk).
+food_type(almondmilk, fakemilk).
+food_type(bokchoy, leafy).
+food_type(cabbage, leafy).
+food_type(carrot, root).
+food_type(gelato, dessert).
+food_type(lentils, legume).
+food_type(chickpea, legume).
+food_type(walnut, legume).
+
+group(protein, fakemeat).
+group(protein, fakemilk).
+group(protein, legume).
+group(vegetable, leafy).
+group(vegetable, root).
+group(sweet, dessert).
+
+food_group(X, Y) :- food_type(X, Z), group(Y, Z).
