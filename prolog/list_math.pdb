@@ -1,0 +1,19 @@
+% List math
+% Brian Heim
+% 2017-07-22
+
+% counts elements in a list
+count(0, []).
+count(Count, [Head|Tail]) :- count(TailCount, Tail), Count is TailCount + 1.
+
+% sum of a list
+sum(0, []).
+sum(Total, [Head|Tail]) :- sum(TailSum, Tail), Total is TailSum + Head.
+
+% average of a list
+average(Average, List) :- sum(Sum, List), count(Count, List), Average is Sum/Count.
+
+% concatenation
+concat([], L, L).
+concat([Head|Tail1], L, [Head|Tail2]) :-
+  concat(Tail1, L, Tail2).
