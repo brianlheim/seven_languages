@@ -1,0 +1,30 @@
+% More list math
+% Brian Heim
+% 2017-07-22
+
+% Fibonacci: sequence index, value of sequence at index
+fibonacci(0, 0).
+fibonacci(1, 1).
+
+fibonacci(Index, Value) :-
+  Index > 1,
+  fibonacci(Index-1, Value1),
+  fibonacci(Index-2, Value2),
+  Value is Value1 + Value2.
+
+% more efficient
+fib2(1, 1, 0).
+fib2(X, Y1, Y2) :-
+  X > 1,
+  X1 is X - 1,
+  fib2(X1, Y2, Y3),
+  Y1 is Y2 + Y3.
+
+% Factorial
+factorial(0, 1).
+
+factorial(In, Out) :-
+  In > 0,
+  In1 is In - 1,
+  factorial(In1, Subproduct),
+  Out is Subproduct * In.

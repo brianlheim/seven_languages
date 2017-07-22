@@ -1,0 +1,31 @@
+% Towers of Hanoi
+% Brian Heim
+% 2017-07-22
+
+% valid if the list is ascending
+ascending([]).
+ascending([Head|[]]).
+ascending([Head|[Head2|Tail]]) :-
+  Head < Head2,
+  ascending([Head2|Tail]).
+
+% count of a list
+count([], 0).
+count([Head|Tail], Count) :-
+  count(Tail, TailCount),
+  Count is TailCount + 1.
+
+% towers of hanoi solver
+move(1, X, Y, _) :-
+  write('move top disk from '),
+  write(X),
+  write(' to '),
+  write(Y),
+  nl.
+
+move(N, X, Y, Z) :-
+  N > 1,
+  M is N-1,
+  move(M, X, Z, Y),
+  move(1, X, Y, _),
+  move(M, Z, Y, X).

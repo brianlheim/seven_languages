@@ -1,0 +1,60 @@
+% List operations
+% Brian Heim
+% 2017-07-22
+
+% reverse a list
+rev([], []).
+
+rev(In, Out) :-
+  rev(In, [], Out).
+
+rev([], Out, Out).
+rev([InHead|InTail], Accum, Out) :-
+  rev(InTail, [InHead|Accum], Out).
+
+% minimum of a list
+
+% min(list, temp, min).
+min([H|T], Min) :-
+  min(T, H, Min).
+
+min([], Min, Min).
+min([H|T], Min0, Min) :-
+  Min1 is min(H, Min0),
+  min(T, Min1, Min).
+
+% max(list, temp, max).
+max([H|T], Max) :-
+  max(T, H, Max).
+
+max([], Max, Max).
+max([H|T], Max0, Max) :-
+  Max1 is max(H, Max0),
+  max(T, Max1, Max).
+
+% sorting
+sort(In, Out) :-
+  sort(In, [], Out).
+
+sort([], Out, Out).
+sort([H|[N|T]], Accum, Out) :-
+  H < N,
+  sort([N|T], [H|Accum], Out).
+
+sort([H|[N|T]], Accum, Out) :-
+  H >= N,
+  sort([H|T], [N|Accum], Out).
+
+% min([Only|[]], Only).
+% min([H|[N|T]], H) :-
+%   H < N,
+%   min([N|T], H).
+%
+% min([H|[N|T]], N) :-
+%   N >= H,
+%   min([N|T], N).
+%
+% min([H|[N|T]], Min) :-
+%   Min < H,
+%   Min < N,
+%   min([N|T], Min).
