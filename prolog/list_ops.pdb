@@ -3,8 +3,6 @@
 % 2017-07-22
 
 % reverse a list
-rev([], []).
-
 rev(In, Out) :-
   rev(In, [], Out).
 
@@ -33,17 +31,45 @@ max([H|T], Max0, Max) :-
   max(T, Max1, Max).
 
 % sorting
-sort(In, Out) :-
-  sort(In, [], Out).
+part4(_, [], [], []).
+part4(Pivot, [H|T], [H|Ls], R) :-
+  H < Pivot,
+  part4(Pivot, T, Ls, R).
+part4(Pivot, [H|T], L, [H|Rs]) :-
+  H >= Pivot,
+  part4(Pivot, T, L, Rs).
 
-sort([], Out, Out).
-sort([H|[N|T]], Accum, Out) :-
-  H < N,
-  sort([N|T], [H|Accum], Out).
+my_sort([], []).
+my_sort([Pivot|InTail], Out) :-
+  part4(Pivot, InTail, Left, Right),
+  my_sort(Left, SortedLeft),
+  my_sort(Right, SortedRight),
+  append(SortedLeft, [Pivot|SortedRight], Out).
 
-sort([H|[N|T]], Accum, Out) :-
-  H >= N,
-  sort([H|T], [N|Accum], Out).
+part6(_, [], Left, Right, Left, Right).
+part6(Pivot, [H|T], Left, Right, L, R) :-
+  H < Pivot,
+  part6(Pivot, T, [H|Left], Right, L, R).
+
+part6(Pivot, [H|T], Left, Right, L, R) :-
+  H >= Pivot,
+  part6(Pivot, T, Left, [H|Right], L, R).
+% 
+% my_sort([], Out, Out).
+% my_sort([InHead|InTail], Accum, Out) :-
+%   my_partition(InHead, InTail, Left, Right, Result),
+%   my_sort(Left, SortedLeft),
+%   my_sort(Right, SortedRight),
+% 
+% 
+% my_sort([], Out, Out).
+% my_sort([H|[N|T]], Accum, Out) :-
+%   H < N,
+%   my_sort([N|T], [H|Accum], Out).
+% 
+% my_sort([H|[N|T]], Accum, Out) :-
+%   H >= N,
+%   my_sort([H|T], [N|Accum], Out).
 
 % min([Only|[]], Only).
 % min([H|[N|T]], H) :-
@@ -58,3 +84,4 @@ sort([H|[N|T]], Accum, Out) :-
 %   Min < H,
 %   Min < N,
 %   min([N|T], Min).
+%
