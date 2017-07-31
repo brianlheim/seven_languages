@@ -1,0 +1,43 @@
+% 8queens.pdb
+% 8 Queens problem
+% Brian Heim
+% 2017-07-31
+
+valid(_, Y) :-
+    Range = [1, 2, 3, 4, 5, 6, 7, 8],
+    member(Y, Range).
+
+list_valid([]).
+list_valid([(X, Y)|T]) :-
+    valid(X, Y),
+    list_valid(T).
+
+column_values([], []).
+column_values([(_, B)|T], [B|Result]) :-
+    column_values(T, Result).
+
+diagonals_nw_se([], []).
+diagonals_nw_se([(A, B)|T], [Sum|Result]) :-
+    Sum is A + B,
+    diagonals_nw_se(T, Result).
+
+diagonals_sw_ne([], []).
+diagonals_sw_ne([(A, B)|T], [Diff|Result]) :-
+    Diff is A - B,
+    diagonals_sw_ne(T, Result).
+
+eight_queens(Board) :-
+    Board = [(1, _), (2, _), (3, _), (4, _), (5, _), (6, _), (7, _), (8, _)],
+    length(Board, 8),
+    list_valid(Board),
+    column_values(Board, Cols),
+    diagonals_sw_ne(Board, DiagSWNE),
+    diagonals_nw_se(Board, DiagNWSE),
+    fd_all_different(Cols),
+    fd_all_different(DiagNWSE),
+    fd_all_different(DiagSWNE).
+
+
+
+
+
