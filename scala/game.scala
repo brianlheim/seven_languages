@@ -5,11 +5,16 @@ import scala.language.postfixOps
 class Game() {
   val side = 3
   val arr = Array.ofDim[Char](side, side)
+  var turn = 'X'
+
+  populate(" " * (side * side))
 
   def this(board: String) {
     this()
     populate(board)
   }
+
+  start
 
   def populate(board: String): Unit = {
     val matrix = board split '\n' map { _.toArray } reduce { _ ++ _ }
@@ -47,21 +52,67 @@ class Game() {
 
   def hasWinner(): Boolean = true
 
-  def winner(): Option[Char] = Some('X')
+  def winner(): String = {
+    val chars = Array('X', 'O')
+    val rows: Array[Array[Char]] = arr
+    val cols: Array[Array[Char]]  = arr.transpose
+    val range = 0 until side toArray
+    val diags: Array[Array[Char]]  = range map { i => Array(arr(i)(i), arr(i)(side-1-i)) } transpose;
+    val ways: Array[Array[Char]] = Array(rows, cols, diags).flatten
+
+    val winning = chars map { char => ways.exists { way => way.forall(_ == char) } }
+
+    if (winning(0)) {
+      if (winning(1)) {
+        return "Tie"
+      } else {
+        return "X"
+      }
+    } else {
+      if (winning(1)) {
+        return "O"
+      } else {
+        return if (arr.flatten.forall(_ != ' ')) "Tie" else "None"
+      }
+    }
+  }
 
   def status(): String = {
-    val str: String = winner getOrElse "null" toString()
-    str
+    winner
+  }
+
+  def placePiece(x: Int, y: Int): Unit = {
+    if (Array(x, y).exists(i => !(0 until side).contains(i))) {
+      println("Out of bounds!")
+      return
+    }
+    if (arr(x)(y) != ' ') {
+      println("That spot is already taken.")
+      return
+    }
+    println("Placing (" + x + ", " + y + ")")
+    arr(x)(y) = turn
+    turn = if (turn == 'X') 'O' else 'X'
+    out
+  }
+
+  def start(): Unit = {
+    out
+
+    while (winner == "None") {
+      println(turn + "'s turn. What position?")
+      var line = scala.io.StdIn.readLine()
+      var Array(x, y) = line.split(" ").map(_.toInt)
+      placePiece(x, y)
+    }
+
+    out
+    println("Winner is: " + winner)
   }
 }
 
 try {
-  val game = new Game("XXX\nOOO\n   ")
-  println(game.hasWinner)
-  println(game.winner)
-  println(game.status)
-  println(game.arr)
-  game.out
+  var game = new Game()
 } catch {
   case e: Exception => println(e)
 }
