@@ -20,13 +20,15 @@ trait Censor {
   }
 }
 
-class Person(greeting: String) {
+class Person(val greeting: String) {
   def greet() = println(greeting)
 }
 
-class CensoredPerson(greeting: String) extends Person(greeting) with Censor {
+class CensoredPerson(override val greeting: String) extends Person(greeting) with Censor {
   override def greet() = println(censor(greeting))
 }
 
 val censed = new CensoredPerson("classic!fuck")
+val person = new Person(censed.greeting)
 censed.greet()
+person.greet()
